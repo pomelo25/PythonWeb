@@ -1,0 +1,35 @@
+# helloworld.py
+# 웹서버에서 실행하고 싶은 파일
+
+print(1+1)
+
+
+# web2-python SSH Terminal
+
+1. ./helloworld.py 실행 가능하게 하기
+  ㄱ. ls -al 로 파일 목록 확인
+  ㄴ. sudo chmod a+x helloworld.py 로 helloworld.py에 실행권한 주기
+  ㄷ. type python3 로 python3 위치 확인하기
+  ㄹ. helloworld.py 에 #!/user/bin/python3 쓰기(helloworld.py 안의 프로그램은 /user/bin/python3 프로그램을 사용하라는 뜻)
+
+2. apache 웹서버 세팅 바꾸기
+  ㄱ. sudo apt-get update -> sudo apt-get install nano 로 nano 에디터 설치
+  ㄴ. sudo nano /etc/apache2/sites-enabled/000-default.conf 에서
+        <Directory /home/cabox/workspace>
+          AddHandler cgi-script .py
+          Options ExecCGI
+        </Directory>
+      추가하고 저장
+  ㄷ. sudo a2enmod cgi
+  ㄹ. sudo service apache2 restart
+ 
+3. 에러 확인
+  ㄱ. sudo tail /var/log/apache2/error.log
+  ㄴ. sudo tail -f /var/log/apache2/error.log -> 실시간으로 에러 로그 확인 가능
+  
+4. 헤더 추가
+  ㄱ. helloworld.py 에 print("content-type: text/html; charset=UTF-8\n") 추가
+
+
+
+
