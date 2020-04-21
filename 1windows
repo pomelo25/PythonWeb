@@ -1,0 +1,17 @@
+1. bitnami wamp 설치
+
+2. python 설치
+
+3. 웹 애플리케이션과 파이썬 연동
+  ㄱ. bitnami/wampstack/apache2/conf/httpd.conf -> LoadModule cgi_module modules/mod_cgi.so 주석처리되있지 않아야함
+  ㄴ. DocumentRoot, <Directory> 확인. <Directory> 안에
+        <Files "*.py">
+           Options ExecCGI
+           AddHandler cgi-script .py
+        </Files>
+      추가
+
+4. 에러 확인
+  ㄱ. bitnami/wampstack/apache2/logs/error.log 에서 에러 확인
+  
+5. python 파일에 #!python, print("content-type: text/html; charset=utf-8\n") 추가
